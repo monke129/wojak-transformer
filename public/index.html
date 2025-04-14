@@ -14,6 +14,10 @@
       <img id="preview" src="" alt="Preview" style="display: none;">
     </div>
     <button onclick="transformImage()">Transform</button>
+    <div class="ca-section">
+      <span id="ca-text">CA: COMING SOON</span>
+      <button onclick="copyCAText()">Copy</button>
+    </div>
     <div>
       <img id="result" src="" alt="Result" style="display: none;">
     </div>
@@ -61,6 +65,16 @@
         button.disabled = false;
         button.textContent = 'Transform';
       }
+    }
+
+    function copyCAText() {
+      const caText = document.getElementById('ca-text').textContent;
+      const caValue = caText.replace('CA: COMING SOON ', ''); // Extract just the "XXXXXXXXXX" part
+      navigator.clipboard.writeText(caValue).then(() => {
+        alert('CA copied to clipboard!');
+      }).catch(err => {
+        alert('Failed to copy: ' + err);
+      });
     }
   </script>
 </body>

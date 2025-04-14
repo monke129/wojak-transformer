@@ -51,6 +51,37 @@ body {
     cursor: not-allowed;
   }
   
+  .ca-section {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  #ca-text {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .ca-section button {
+    padding: 5px 10px;
+    font-size: 1em;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .ca-section button:hover {
+    background-color: #ddd;
+  }
+  
   #preview,
   #result {
     max-width: 300px;
