@@ -7,14 +7,16 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Transform Your Image into Wojak Style!</h1>
-  <input type="file" id="imageUpload" accept="image/*">
-  <div>
-    <img id="preview" src="" alt="Preview" style="display: none;">
-  </div>
-  <button onclick="transformImage()">Transform</button>
-  <div>
-    <img id="result" src="" alt="Result" style="display: none;">
+  <div class="hero-section">
+    <h1>Transform Your Image into Wojak Style!</h1>
+    <input type="file" id="imageUpload" accept="image/*">
+    <div>
+      <img id="preview" src="" alt="Preview" style="display: none;">
+    </div>
+    <button onclick="transformImage()">Transform</button>
+    <div>
+      <img id="result" src="" alt="Result" style="display: none;">
+    </div>
   </div>
 
   <script>
@@ -34,7 +36,6 @@
       const formData = new FormData();
       formData.append('image', uploadInput.files[0]);
 
-      // Show loading state
       result.style.display = 'none';
       const button = document.querySelector('button');
       button.disabled = true;
