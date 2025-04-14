@@ -12,14 +12,19 @@ module.exports = async (req, res) => {
     }
 
     if (!req.file) {
+      console.error('No file uploaded');
       return res.status(400).json({ error: 'No image uploaded' });
     }
 
     try {
+      console.log('File received:', req.file.originalname, req.file.size, 'bytes');
+
       const formData = new FormData();
       formData.append('image', req.file.buffer, 'image.jpg');
 
       console.log('Sending request to DeepAI...');
+      console.log('DeepAI API Key:', process.env.DEEPAI_API_KEY ? 'Set' : 'Not set');
+
       const apiResponse = await axios.post(
         'https://api.deepai.org/api/toonify',
         formData,
@@ -28,7 +33,7 @@ module.exports = async (req, res) => {
             'Api-Key': process.env.DEEPAI_API_KEY,
             ...formData.getHeaders(),
           },
-          timeout: 60000,
+          timeout: 60000, // 60 seconds timeout
         }
       );
 
@@ -44,7 +49,8 @@ module.exports = async (req, res) => {
     } catch (error) {
       console.error('Transformation error:', error.message);
       if (error.response) {
-        console.error('DeepAI response:', error.response.data);
+        console.error('DeepAI response status:', error.response.status);
+        console.error('DeepAI response data:', error.response.data);
       }
       res.status(500).json({ error: 'Image transformation failed: ' + error.message });
     }
