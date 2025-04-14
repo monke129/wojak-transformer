@@ -15,7 +15,7 @@
     </div>
     <button onclick="transformImage()">Transform</button>
     <div class="ca-section">
-      <span id="ca-text">CA: OFFICIAL LAUNCH SOON</span>
+      <span id="ca-text">CA: AuHCxkEUaG71SgFrNe3Ss1DZzFLDt6ehk7tZinwpump</span>
       <button onclick="copyCAText()">Copy</button>
     </div>
     <div>
@@ -60,7 +60,7 @@
         }
       } catch (error) {
         console.error(error);
-        alert('OFFICIAL LAUNCH SOON!');
+        alert('Retardifying!');
       } finally {
         button.disabled = false;
         button.textContent = 'Retardify';
@@ -69,7 +69,7 @@
 
     function copyCAText() {
       const caText = document.getElementById('ca-text').textContent;
-      const caValue = caText.replace('CA: COMING SOON ', ''); // Extract just the "XXXXXXXXXX" part
+      const caValue = caText.replace('CA: COMING SOON ', ''); //
       navigator.clipboard.writeText(caValue).then(() => {
         alert('CA copied to clipboard!');
       }).catch(err => {
