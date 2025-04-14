@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wojak Transformer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Transform Your Image into Wojak Style!</h1>
+  <input type="file" id="imageUpload" accept="image/*">
+  <div>
+    <img id="preview" src="" alt="Preview" style="display: none;">
+  </div>
+  <button onclick="transformImage()">Transform</button>
+  <div>
+    <img id="result" src="" alt="Result" style="display: none;">
+  </div>
+
+  <script>
+    const uploadInput = document.getElementById('imageUpload');
+    const preview = document.getElementById('preview');
+    const result = document.getElementById('result');
+
+    uploadInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+      }
+    });
+
+    async function transformImage() {
+      const formData = new FormData();
+      formData.append('image', uploadInput.files[0]);
+
+      // Show loading state
+      result.style.display = 'none';
+      const button = document.querySelector('button');
+      button.disabled = true;
+      button.textContent = 'Transforming...';
+
+      try {
+        const response = await fetch('/api/transform', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const data = await response.json();
+        if (data.imageUrl) {
+          result.src = data.imageUrl;
+          result.style.display = 'block';
+        } else {
+          alert('Error: ' + (data.error || 'Transformation failed'));
+        }
+      } catch (error) {
+        console.error(error);
+        alert('Error transforming image!');
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Transform';
+      }
+    }
+  </script>
+</body>
+</html>
